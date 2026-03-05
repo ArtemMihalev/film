@@ -1,0 +1,510 @@
+/* styles/components.css */
+.cinema-widget {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s;
+}
+
+.cinema-widget:hover {
+    border-color: var(--primary);
+    box-shadow: var(--glow-primary);
+}
+
+/* Шапка виджета */
+.widget-header {
+    background: linear-gradient(90deg, var(--bg-tertiary), var(--bg-secondary));
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+}
+
+.widget-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+.widget-title {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--primary);
+}
+
+.widget-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.widget-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    width: 30px;
+    height: 30px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.widget-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.minimize-btn:hover {
+    border-color: var(--secondary);
+    color: var(--secondary);
+}
+
+.close-btn:hover {
+    border-color: var(--secondary);
+    color: var(--secondary);
+    background: rgba(255, 77, 77, 0.1);
+}
+
+/* Контент виджета */
+.widget-content {
+    padding: 1.5rem;
+    min-height: 300px;
+}
+
+/* Минимизированный виджет */
+.cinema-widget.minimized .widget-content {
+    display: none;
+}
+
+.cinema-widget.minimized {
+    height: auto;
+}
+
+/* Скелетон загрузки */
+.skeleton {
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: var(--bg-tertiary);
+    }
+    100% {
+        background-color: var(--bg-secondary);
+    }
+}
+
+/* Стили для поиска фильмов */
+.search-container {
+    width: 100%;
+}
+
+.search-input-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.search-input {
+    flex: 1;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.8rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.search-btn {
+    background: var(--primary);
+    border: none;
+    color: var(--bg-primary);
+    padding: 0 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.search-btn:hover {
+    background: var(--primary-dark);
+    box-shadow: var(--glow-primary);
+}
+
+/* Карточка фильма */
+.movie-card {
+    display: flex;
+    gap: 1.5rem;
+    background: var(--bg-tertiary);
+    padding: 1.5rem;
+    border-radius: 4px;
+    border-left: 3px solid var(--primary);
+}
+
+.movie-poster {
+    width: 120px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 2px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.movie-info {
+    flex: 1;
+}
+
+.movie-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.movie-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.movie-rating {
+    color: var(--primary);
+}
+
+.movie-plot {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+/* Список ожидания */
+.watchlist-container {
+    width: 100%;
+}
+
+.watchlist-input-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.watchlist-input {
+    flex: 1;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.8rem;
+    font-family: var(--font-body);
+}
+
+.watchlist-add-btn {
+    background: var(--secondary);
+    border: none;
+    color: white;
+    padding: 0 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.watchlist-add-btn:hover {
+    background: var(--secondary-dark);
+    box-shadow: var(--glow-secondary);
+}
+
+.watchlist-items {
+    list-style: none;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.watchlist-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem;
+    background: var(--bg-tertiary);
+    margin-bottom: 0.5rem;
+    border-left: 2px solid transparent;
+    transition: all 0.3s;
+}
+
+.watchlist-item:hover {
+    border-left-color: var(--primary);
+}
+
+.watchlist-item.completed {
+    opacity: 0.5;
+}
+
+.watchlist-item.completed .watchlist-title {
+    text-decoration: line-through;
+}
+
+.watchlist-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--primary);
+}
+
+.watchlist-title {
+    flex: 1;
+    color: var(--text-primary);
+}
+
+.watchlist-delete {
+    background: transparent;
+    border: none;
+    color: var(--secondary);
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0 0.5rem;
+}
+
+.watchlist-delete:hover {
+    color: var(--secondary-dark);
+}
+
+/* Случайный фильм */
+.random-movie-container {
+    width: 100%;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.random-movie-card {
+    background: var(--bg-tertiary);
+    padding: 1.5rem;
+    border-radius: 4px;
+    border-right: 3px solid var(--secondary);
+}
+
+.random-movie-poster {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.random-movie-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+}
+
+.random-movie-overview {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.random-btn {
+    background: var(--secondary);
+    border: none;
+    color: white;
+    padding: 1rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.random-btn:hover {
+    background: var(--secondary-dark);
+    box-shadow: var(--glow-secondary);
+}
+
+/* Дополнительные стили для исправления отображения */
+.watchlist-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.watchlist-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem;
+    background: var(--bg-tertiary);
+    margin-bottom: 0.5rem;
+    border-left: 2px solid transparent;
+    transition: all 0.3s;
+    border-radius: 2px;
+}
+
+.movie-results {
+    margin-top: 1rem;
+}
+
+.movie-card {
+    display: flex;
+    gap: 1.5rem;
+    background: var(--bg-tertiary);
+    padding: 1.5rem;
+    border-radius: 4px;
+    border-left: 3px solid var(--primary);
+}
+
+/* Индикатор загрузки */
+.skeleton {
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+    0% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+/* styles/components.css - добавьте в конец файла */
+
+.watchlist-container {
+    width: 100%;
+}
+
+.watchlist-input-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.watchlist-input {
+    flex: 1;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.8rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+}
+
+.watchlist-input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.watchlist-add-btn {
+    background: var(--secondary);
+    border: none;
+    color: white;
+    padding: 0 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.watchlist-add-btn:hover {
+    background: var(--secondary-dark);
+    box-shadow: var(--glow-secondary);
+}
+
+.watchlist-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.watchlist-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem;
+    background: var(--bg-tertiary);
+    margin-bottom: 0.5rem;
+    border-left: 2px solid transparent;
+    transition: all 0.3s;
+    border-radius: 2px;
+}
+
+.watchlist-item:hover {
+    border-left-color: var(--primary);
+    background: var(--bg-secondary);
+}
+
+.watchlist-item.completed {
+    opacity: 0.6;
+}
+
+.watchlist-item.completed .watchlist-title {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+}
+
+.watchlist-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--primary);
+}
+
+.watchlist-title {
+    flex: 1;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+}
+
+.watchlist-delete {
+    background: transparent;
+    border: none;
+    color: var(--secondary);
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0 0.5rem;
+    transition: all 0.3s;
+}
+
+.watchlist-delete:hover {
+    color: var(--secondary-dark);
+    transform: scale(1.1);
+}
+
+/* Скроллбар */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}

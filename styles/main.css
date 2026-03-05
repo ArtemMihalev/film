@@ -1,0 +1,285 @@
+/* styles/main.css */
+:root {
+    --primary: #ffd700;
+    --primary-dark: #ccaa00;
+    --secondary: #ff4d4d;
+    --secondary-dark: #cc0000;
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #1a1a1a;
+    --bg-tertiary: #2a2a2a;
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --border-color: #333;
+    --glow-primary: 0 0 20px rgba(255, 215, 0, 0.3);
+    --glow-secondary: 0 0 20px rgba(255, 77, 77, 0.3);
+    --font-display: 'Cinzel', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Эффект занавеса */
+.theater-curtain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+    display: flex;
+    justify-content: space-between;
+}
+
+.curtain-left,
+.curtain-right {
+    width: 15%;
+    height: 100%;
+    background: linear-gradient(135deg, #8b0000 0%, #330000 100%);
+    position: relative;
+    animation: curtainOpen 2s ease-out forwards;
+}
+
+.curtain-left {
+    left: 0;
+    transform-origin: left;
+}
+
+.curtain-right {
+    right: 0;
+    transform-origin: right;
+}
+
+@keyframes curtainOpen {
+    0% {
+        transform: scaleX(1);
+    }
+    100% {
+        transform: scaleX(0);
+    }
+}
+
+/* Шапка */
+.cinema-header {
+    text-align: center;
+    padding: 3rem 1rem;
+    position: relative;
+}
+
+.cinema-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--primary), 
+        var(--secondary), 
+        transparent
+    );
+}
+
+.cinema-title {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.title-glow {
+    color: var(--primary);
+    text-shadow: var(--glow-primary);
+    animation: flicker 3s infinite;
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+/* Кнопки управления */
+.dashboard-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    flex-wrap: wrap;
+}
+
+.cinema-btn {
+    background: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    z-index: 1;
+}
+
+.cinema-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    transition: left 0.5s;
+    z-index: -1;
+}
+
+.cinema-btn:hover {
+    color: var(--bg-primary);
+    border-color: var(--secondary);
+}
+
+.cinema-btn:hover::before {
+    left: 100%;
+}
+
+/* Сетка дашборда */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Футер */
+.cinema-footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+.cinema-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20%;
+    right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--text-secondary), transparent);
+}
+
+/* styles/main.css - исправляем кнопки */
+
+.cinema-btn {
+    background: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary); /* Явно задаем цвет текста */
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    z-index: 1;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5); /* Добавляем свечение тексту */
+}
+
+.cinema-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    transition: left 0.5s;
+    z-index: -1;
+    opacity: 0.3; /* Уменьшаем непрозрачность */
+}
+
+.cinema-btn:hover {
+    color: var(--primary); /* Оставляем цвет золотым */
+    border-color: var(--secondary);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8); /* Усиливаем свечение при наведении */
+    transform: scale(1.05); /* Добавляем легкое увеличение */
+}
+
+.cinema-btn:hover::before {
+    left: 100%;
+}
+
+/* Стили для кнопок добавления в виджетах */
+.watchlist-add-btn,
+.search-btn {
+    background: var(--secondary);
+    border: none;
+    color: white; /* Явно задаем белый цвет */
+    padding: 0 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Свечение */
+}
+
+.watchlist-add-btn:hover,
+.search-btn:hover {
+    background: var(--secondary-dark);
+    box-shadow: var(--glow-secondary);
+    color: white; /* Сохраняем белый цвет */
+    transform: scale(1.02);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .cinema-title {
+        font-size: 2rem;
+        letter-spacing: 4px;
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+    
+    .cinema-btn {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+    }
+}
