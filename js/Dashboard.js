@@ -16,6 +16,9 @@ export class Dashboard {
         console.log('Dashboard initialized');
     }
     
+    findWatchlistWidget() {
+    return this.widgets.find(w => w.constructor.name === 'WatchlistWidget');
+    }
     addWidget(widgetType) {
         this.widgetCounter++;
         const widgetId = `${widgetType}-${this.widgetCounter}-${Date.now()}`;

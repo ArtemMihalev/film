@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Создаем экземпляр Dashboard
     const dashboard = new Dashboard('dashboard-container');
-    
+
+    window.dashboard = dashboard; // Добавь эту строку
     // Добавляем обработчики для кнопок добавления виджетов
     const addButtons = document.querySelectorAll('[data-add]');
     

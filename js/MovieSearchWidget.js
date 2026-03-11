@@ -127,6 +127,15 @@ export class MovieSearchWidget extends UIComponent {
                 </div>
             </div>
         `;
+     
+        const addToWatchlistBtn = document.getElementById(`${this.id}-add-watchlist`);
+        if (addToWatchlistBtn) {
+            addToWatchlistBtn.onclick = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.addToWatchlist();
+            };
+        }
         
         // Добавляем обработчики с задержкой, чтобы гарантировать, что DOM обновился
         setTimeout(() => {
@@ -164,6 +173,49 @@ export class MovieSearchWidget extends UIComponent {
         }, 0);
     }
     
+    addToWatchlist() {
+        if (!this.searchResults) return;
+        
+        const dashboard = window.dashboard;
+        
+        if (dashboard) {
+            const watchlistWidget = dashboard.findWatchlistWidget();
+            
+            if (watchlistWidget) {
+                watchlistWidget.addItem(`${this.searchResults.Title} (${this.searchResults.Year})`);
+                this.showNotification('Фильм добавлен в список просмотра!');
+            } else {
+                const newWidget = dashboard.addWidget('watchlist');
+                setTimeout(() => {
+                    newWidget.addItem(`${this.searchResults.Title} (${this.searchResults.Year})`);
+                }, 500);
+                this.showNotification('Создан новый список и фильм добавлен!');
+            }
+        }
+    }
+
+    showNotification(message) {
+        const notification = document.createElement('div');
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--secondary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            font-family: var(--font-display);
+            z-index: 10000;
+            animation: slideIn 0.3s ease;
+        `;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 2000);
+    }
+
     renderMovieContent() {
         if (this.isLoading) {
             return `
@@ -221,7 +273,9 @@ export class MovieSearchWidget extends UIComponent {
                             👥 ${this.searchResults.Actors || 'N/A'}
                         </div>
                     </div>
+
                 </div>
+                <button class="search-btn" id="${this.id}-add-watchlist" style="margin-top:1rem; width:100%; background: var(--primary); padding: 1rem; font-size: 1.1rem;">➕ ДОБАВИТЬ В СПИСОК ПРОСМОТРА</button>
             `;
         }
         
