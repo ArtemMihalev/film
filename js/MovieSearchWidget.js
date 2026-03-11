@@ -1,13 +1,32 @@
 // js/MovieSearchWidget.js
 import { UIComponent } from './UIComponent.js';
 
+// Функция транслитерации русских букв в английские
+function transliterateRussian(text) {
+    const mapping = {
+        'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'yo',
+        'ж': 'zh', 'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm',
+        'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u',
+        'ф': 'f', 'х': 'kh', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'sch', 'ъ': '',
+        'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu', 'я': 'ya',
+        
+        'А': 'A', 'Б': 'B', 'В': 'V', 'Г': 'G', 'Д': 'D', 'Е': 'E', 'Ё': 'Yo',
+        'Ж': 'Zh', 'З': 'Z', 'И': 'I', 'Й': 'Y', 'К': 'K', 'Л': 'L', 'М': 'M',
+        'Н': 'N', 'О': 'O', 'П': 'P', 'Р': 'R', 'С': 'S', 'Т': 'T', 'У': 'U',
+        'Ф': 'F', 'Х': 'Kh', 'Ц': 'Ts', 'Ч': 'Ch', 'Ш': 'Sh', 'Щ': 'Sch', 'Ъ': '',
+        'Ы': 'Y', 'Ь': '', 'Э': 'E', 'Ю': 'Yu', 'Я': 'Ya'
+    };
+    
+    return text.split('').map(char => mapping[char] || char).join('');
+}
+
 export class MovieSearchWidget extends UIComponent {
     constructor(config) {
         super(config);
         this.searchResults = null;
         this.isLoading = false;
         this.error = null;
-        // ВСТАВЬТЕ СВОЙ КЛЮЧ ЗДЕСЬ
+        
         this.apiKey = '2d83b5c3'; 
         this.lastSearch = '';
         
@@ -15,14 +34,22 @@ export class MovieSearchWidget extends UIComponent {
     }
     
     async searchMovie(title) {
-        if (!title || !title.trim()) {
-            this.error = 'Please enter a movie title';
-            this.renderContent();
-            return;
-        }
-        
-        const searchTerm = title.trim();
-        console.log('Searching for movie:', searchTerm);
+    if (!title || !title.trim()) {
+        this.error = 'Пожалуйста, введите название фильма';
+        this.renderContent();
+        return;
+    }
+    
+    let searchTerm = title.trim();
+    
+    // Транслитерируем русские буквы
+    if (/[а-яА-ЯёЁ]/.test(searchTerm)) {
+        const transliterated = transliterateRussian(searchTerm);
+        console.log(`Транслитерация: "${searchTerm}" → "${transliterated}"`);
+        searchTerm = transliterated;
+    }
+    
+    console.log('Поиск фильма:', searchTerm);
         
         this.isLoading = true;
         this.error = null;
@@ -43,7 +70,7 @@ export class MovieSearchWidget extends UIComponent {
                 this.lastSearch = searchTerm;
                 this.error = null;
             } else {
-                this.error = data.Error || 'Movie not found';
+                this.error = data.Error || 'Фильм не найден';
                 this.searchResults = null;
             }
         } catch (error) {
@@ -87,11 +114,11 @@ export class MovieSearchWidget extends UIComponent {
                 <div class="search-input-group">
                     <input type="text" 
                            class="search-input" 
-                           placeholder="ENTER MOVIE TITLE..."
+                           placeholder="ВВЕДИТЕ НАЗВАНИЕ..."
                            value="${this.lastSearch}"
                            id="${inputId}">
                     <button class="search-btn" id="${btnId}">
-                        SEARCH
+                        ПОИСК
                     </button>
                 </div>
                 
@@ -155,10 +182,10 @@ export class MovieSearchWidget extends UIComponent {
             return `
                 <div class="movie-card" style="border-left-color: var(--secondary);">
                     <div class="movie-info">
-                        <div class="movie-title" style="color: var(--secondary);">⚠️ ERROR</div>
+                        <div class="movie-title" style="color: var(--secondary);">⚠️ ОШИБКА</div>
                         <div class="movie-plot">${this.error}</div>
                         <div style="margin-top:10px; font-size:12px; color:var(--text-secondary);">
-                            Try: "Inception", "Matrix", "Avatar"
+                            Для примера: "Начало", "Матрица", "Аватар"
                         </div>
                     </div>
                 </div>
@@ -202,9 +229,9 @@ export class MovieSearchWidget extends UIComponent {
             <div class="movie-card" style="justify-content:center;text-align:center; min-height:200px;">
                 <div class="movie-info">
                     <div style="font-size:3rem;margin-bottom:1rem;">🎬</div>
-                    <div class="movie-plot">SEARCH FOR A MOVIE TO BEGIN</div>
+                    <div class="movie-plot">ВВЕДИТЕ НАЗВАНИЕ ФИЛЬМА</div>
                     <div style="margin-top:10px; color:var(--text-secondary);">
-                        Try: "Inception", "The Matrix", "Avatar"
+                        Для примера: "Начало", "Матрица", "Аватар"
                     </div>
                 </div>
             </div>

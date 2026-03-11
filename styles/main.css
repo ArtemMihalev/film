@@ -145,6 +145,7 @@ body {
     overflow: hidden;
     transition: all 0.3s;
     z-index: 1;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
 }
 
 .cinema-btn::before {
@@ -157,11 +158,14 @@ body {
     background: linear-gradient(90deg, transparent, var(--primary), transparent);
     transition: left 0.5s;
     z-index: -1;
+    opacity: 0.3;
 }
 
 .cinema-btn:hover {
-    color: var(--bg-primary);
+    color: var(--primary);
     border-color: var(--secondary);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    transform: scale(1.05);
 }
 
 .cinema-btn:hover::before {
@@ -198,56 +202,12 @@ body {
     background: linear-gradient(90deg, transparent, var(--text-secondary), transparent);
 }
 
-/* styles/main.css - исправляем кнопки */
-
-.cinema-btn {
-    background: transparent;
-    border: 2px solid var(--primary);
-    color: var(--primary); /* Явно задаем цвет текста */
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-    font-weight: 700;
-    padding: 1rem 2rem;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s;
-    z-index: 1;
-    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5); /* Добавляем свечение тексту */
-}
-
-.cinema-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, var(--primary), transparent);
-    transition: left 0.5s;
-    z-index: -1;
-    opacity: 0.3; /* Уменьшаем непрозрачность */
-}
-
-.cinema-btn:hover {
-    color: var(--primary); /* Оставляем цвет золотым */
-    border-color: var(--secondary);
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8); /* Усиливаем свечение при наведении */
-    transform: scale(1.05); /* Добавляем легкое увеличение */
-}
-
-.cinema-btn:hover::before {
-    left: 100%;
-}
-
 /* Стили для кнопок добавления в виджетах */
 .watchlist-add-btn,
 .search-btn {
     background: var(--secondary);
     border: none;
-    color: white; /* Явно задаем белый цвет */
+    color: white;
     padding: 0 1.5rem;
     font-family: var(--font-display);
     font-weight: 700;
@@ -255,14 +215,14 @@ body {
     transition: all 0.3s;
     text-transform: uppercase;
     letter-spacing: 1px;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Свечение */
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
 .watchlist-add-btn:hover,
 .search-btn:hover {
     background: var(--secondary-dark);
     box-shadow: var(--glow-secondary);
-    color: white; /* Сохраняем белый цвет */
+    color: white;
     transform: scale(1.02);
 }
 

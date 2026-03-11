@@ -1,6 +1,7 @@
 // js/Dashboard.js
 import { MovieSearchWidget } from './MovieSearchWidget.js';
 import { WatchlistWidget } from './WatchlistWidget.js';
+import { RandomMovieWidget } from './RandomMovieWidget.js';
 
 export class Dashboard {
     constructor(containerId) {
@@ -26,13 +27,19 @@ export class Dashboard {
             case 'search':
                 widget = new MovieSearchWidget({
                     id: widgetId,
-                    title: '🔍 NOW PLAYING SEARCH'
+                    title: '🔍 ПОИСК ФИЛЬМОВ'
                 });
                 break;
             case 'watchlist':
                 widget = new WatchlistWidget({
                     id: widgetId,
-                    title: '📋 MY WATCHLIST'
+                    title: '📋 МОЙ СПИСОК'
+                });
+                break;
+            case 'random':
+                widget = new RandomMovieWidget({
+                    id: widgetId,
+                    title: '🎲 СЛУЧАЙНЫЙ ФИЛЬМ'
                 });
                 break;
             default:

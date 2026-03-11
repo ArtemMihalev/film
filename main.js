@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const widget = dashboard.addWidget(widgetType);
                 console.log('Widget added:', widget);
             } else {
-                alert('Maximum 6 widgets allowed. Close some to add more. 🎬');
+                alert('Максимум 6 виджетов. Закройте несколько, чтобы добавить новые. 🎬');
             }
         });
     });

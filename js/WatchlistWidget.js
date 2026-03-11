@@ -122,11 +122,11 @@ export class WatchlistWidget extends UIComponent {
                 <div class="watchlist-input-group">
                     <input type="text" 
                            class="watchlist-input" 
-                           placeholder="ADD MOVIE TO WATCH..."
+                           placeholder="ДОБАВИТЬ ФИЛЬМ..."
                            id="${inputId}"
                            value="">
                     <button class="watchlist-add-btn" id="${addBtnId}">
-                        + ADD
+                        + ДОБАВИТЬ
                     </button>
                 </div>
                 
@@ -136,7 +136,7 @@ export class WatchlistWidget extends UIComponent {
                 
                 ${this.items.length > 0 ? `
                     <div style="margin-top:1rem;text-align:right;color:var(--text-secondary);">
-                        🎬 ${this.items.length} movie${this.items.length !== 1 ? 's' : ''} in watchlist
+                        🎬 ${this.items.length} фильм${this.items.length !== 1 ? 'ов' : ''} в списке
                     </div>
                 ` : ''}
             </div>
@@ -147,7 +147,7 @@ export class WatchlistWidget extends UIComponent {
         if (this.items.length === 0) {
             return `
                 <li class="watchlist-item" style="justify-content:center; list-style:none;">
-                    <span style="color:var(--text-secondary);">🍿 NO MOVIES IN WATCHLIST</span>
+                    <span style="color:var(--text-secondary);">🍿 НЕТ ФИЛЬМОВ В СПИСКЕ</span>
                 </li>
             `;
         }
@@ -192,7 +192,7 @@ export class WatchlistWidget extends UIComponent {
                     input.value = ''; // Очищаем поле
                     input.focus(); // Возвращаем фокус
                 } else {
-                    alert('Please enter a movie name!');
+                    alert('Пожалуйста, введите название фильма!');
                 }
                 return false;
             };
